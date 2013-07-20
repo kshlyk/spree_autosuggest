@@ -29,7 +29,9 @@ module Spree
           @search = Suggestion.search(params[:q])
           @collection = @search.result.page(params[:page]).order('spree_suggestions.id DESC')
         else
-          @collection = Suggestion.where("LOWER(suggestions.name) #{LIKE} LOWER(:search)",
+
+          #Orignal Query : @collection = Suggestion.where("LOWER(spree_suggestions.name) #{LIKE} LOWER(:search)",
+          @collection = Suggestion.where("LOWER(:search)",
                                    {search: "#{params[:q].strip}%"}).limit(params[:limit] || 100).order('spree_suggestions.id DESC')
         end
       end

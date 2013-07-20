@@ -3,6 +3,7 @@ module Spree
     caches_action :index, cache_path: Proc.new {|c| c.request.url }
 
     def index
+      params['term'] ||= " "
       if Spree::Autosuggest::Config[:search_backend]
         suggestions = Spree::Config[:searcher_class].new(keywords: params['term']).retrieve_products.map(&:name)
         suggestions = Spree::Product.search(name_cont: params['term']).result(distinct: true).map(&:name) if suggestions.blank?

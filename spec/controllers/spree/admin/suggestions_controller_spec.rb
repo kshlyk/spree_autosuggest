@@ -18,10 +18,9 @@ describe Spree::Admin::SuggestionsController do
       response.should render_template :index
     end
 
-    pending "doesn't include inactive products as @suggestions" do
+    it "Should not display products not available today" do
       # inactive products shouldn't include in auto-suggested list
       Spree::Suggestion.where(keywords: inactive_product.name).first.should be_nil
-      response.should render_template :index
     end
   end
 
@@ -45,6 +44,13 @@ describe Spree::Admin::SuggestionsController do
   end
 
   context "#collection" do
-    #work in progress
+
+    it "gets suggestions against ajax requests" do
+      active_inactive_product_objects = [product,inactive_product]
+      create_suggestions active_inactive_product_objects
+      spree_xhr_get :index,:q => "ca"
+      response.should be_success
+    end
+
   end
 end
