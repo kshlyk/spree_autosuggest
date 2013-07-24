@@ -5,8 +5,8 @@ describe Spree::Admin::SuggestionsController do
 
   before { controller.stub spree_current_user: create(:user) }
 
-  let(:product) { create(:product, name: "test product1") }
-  let!(:inactive_product) { create(:product, available_on: Time.now.tomorrow, name: "inactive") }
+  let!(:product) { create(:product, name: "Moose Roadsign") }
+  let!(:inactive_product) { create(:product, available_on: Time.now.tomorrow, name: "Robot Roadsign") }
 
   context "#index" do
     it "include all active_products as @suggestions" do
@@ -18,7 +18,7 @@ describe Spree::Admin::SuggestionsController do
       response.should render_template :index
     end
 
-    it "Should not display products not available today" do
+    it "should not display products not available today" do
       # inactive products shouldn't include in auto-suggested list
       Spree::Suggestion.where(keywords: inactive_product.name).first.should be_nil
     end
@@ -26,31 +26,29 @@ describe Spree::Admin::SuggestionsController do
 
   context "#destroy" do
     it "delete requested suggestion and redirect it to suggestion list" do
-      active_inactive_product_objects = [product,inactive_product]
+      active_inactive_product_objects = [product, inactive_product]
       create_suggestions active_inactive_product_objects
-      suggestion = Spree::Suggestion.where(keywords: "test product1").first
+      suggestion = Spree::Suggestion.where(keywords: product.name).first
       spree_delete :destroy, { id: suggestion.id }
       response.should redirect_to spree.admin_suggestions_path
     end
 
     it "delete requested suggestion" do
-      active_inactive_product_objects = [product,inactive_product]
+      active_inactive_product_objects = [product, inactive_product]
       create_suggestions active_inactive_product_objects
       expect {
-        @suggestion = Spree::Suggestion.where(keywords: "test product1").first
+        @suggestion = Spree::Suggestion.where(keywords: product.name).first
         spree_delete :destroy, { id: @suggestion.id }
       }.to be_true
     end
   end
 
   context "#collection" do
-
     it "gets suggestions against ajax requests" do
-      active_inactive_product_objects = [product,inactive_product]
+      active_inactive_product_objects = [product, inactive_product]
       create_suggestions active_inactive_product_objects
-      spree_xhr_get :index,:q => "ca"
+      spree_xhr_get :index, q: "ca"
       response.should be_success
     end
-
   end
 end

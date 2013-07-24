@@ -4,12 +4,12 @@ feature "Autosuggest" do
   stub_authorization!
 
   background do
-    visit '/'
+    visit spree.root_path
   end
 
   context "listing Suggestions" do
-    scenario "it should visit spree home page" do
-      page.should have_content("No products found")
+    scenario "should visit spree home page" do
+      expect(page).to have_content "No products found"
     end
   end
 end

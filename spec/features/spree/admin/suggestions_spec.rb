@@ -7,7 +7,7 @@ feature "Admin Suggestions" do
     visit spree.admin_path
   end
 
-  context "listing Suggestions" do
+  context "listing suggestions" do
     background do
       create(:product, name: "apache baseball cap", sku: "A001")
       create(:product, name: "zomg shirt", sku: "B001")

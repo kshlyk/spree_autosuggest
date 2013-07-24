@@ -5,10 +5,10 @@ describe Spree::SuggestionsController do
 
   before { controller.stub spree_current_user: nil }
 
-  let(:product) { create(:product, name: "test product1") }
-  let(:params) { params = {'term' => 'cap'} }
+  let(:product) { create(:product, name: "Moose Roadsign") }
+  let(:params) { params = { "term" => "forrest" } }
 
-  before("visiting ") do
+  before do
     Spree::Autosuggest::Config[:search_backend] = false
   end
 
@@ -20,7 +20,7 @@ describe Spree::SuggestionsController do
 
     it "response to ajax response and render json as response" do
       spree_xhr_get :index
-      response.header['Content-Type'].should include 'application/json'
+      response.header["Content-Type"].should include "application/json"
     end
   end
 end
