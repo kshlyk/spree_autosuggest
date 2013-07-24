@@ -1,8 +1,8 @@
 # Spree Autosuggest
 
-[![Build Status](https://secure.travis-ci.org/futhr/spree_autosuggest.png?branch=master)](http://travis-ci.org/futhr/spree_autosuggest)
+[![Build Status](https://secure.travis-ci.org/futhr/spree_autosuggest.png?branch=2-0-stable)](http://travis-ci.org/futhr/spree_autosuggest)
 [![Dependency Status](https://gemnasium.com/futhr/spree_autosuggest.png)](https://gemnasium.com/futhr/spree_autosuggest)
-[![Coverage Status](https://coveralls.io/repos/futhr/spree_autosuggest/badge.png?branch=master)](https://coveralls.io/r/futhr/spree_autosuggest)
+[![Coverage Status](https://coveralls.io/repos/futhr/spree_autosuggest/badge.png?branch=2-0-stable)](https://coveralls.io/r/futhr/spree_autosuggest)
 
 This extension adds suggestions for product search.
 
@@ -10,7 +10,7 @@ This extension adds suggestions for product search.
 
 Add to your app `Gemfile`:
 ```ruby
-gem 'spree_autosuggest', github: 'futhr/spree_autosuggest'
+gem 'spree_autosuggest', github: 'futhr/spree_autosuggest', branch: '2-0-stable'
 ```
 
 Run
@@ -51,6 +51,6 @@ Copyright (c) 2013 Aleksey Demidov, released under the [New BSD License][3]
 
 [1]: http://www.fsf.org/licensing/essays/free-sw.html
 [2]: https://github.com/futhr/spree_autosuggest/issues
-[3]: https://github.com/futhr/spree_autosuggest/tree/master/LICENSE.md
+[3]: https://github.com/futhr/spree_autosuggest/blob/2-0-stable/LICENSE.md
 [4]: http://www.localeapp.com/projects/4933
 [5]: https://github.com/thoughtbot/guides
