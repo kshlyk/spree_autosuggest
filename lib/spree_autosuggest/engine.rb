@@ -1,4 +1,7 @@
-module Spree::Autosuggest; end
+module Spree
+  module Autosuggest
+  end
+end
 
 module SpreeAutosuggest
   class Engine < Rails::Engine
