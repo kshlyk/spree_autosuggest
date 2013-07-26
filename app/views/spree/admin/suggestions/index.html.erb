@@ -23,8 +23,8 @@
     <td><%= suggestion.count %></td>
     <td><%= suggestion.items_found %></td>
     <td><%= suggestion.data %></td>
-    <td><%= suggestion.created_at %></td>
-    <td><%= suggestion.updated_at %></td>
+    <td><%= suggestion.created_at ? l(suggestion.created_at) : "" %></td>
+    <td><%= suggestion.updated_at ? l(suggestion.updated_at) : "" %></td>
     <td><%= link_to Spree.t(:destroy), admin_suggestion_path(suggestion), confirm: Spree.t(:are_you_sure_delete), method: :delete %></td>
   </tr>
 <% end %>

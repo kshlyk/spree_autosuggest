@@ -27,7 +27,7 @@ module Spree
 
         unless request.xhr?
           @search = Suggestion.search(params[:q])
-          @collection = @search.result.page(params[:page]).order('spree_suggestions.id DESC')
+          @collection = @search.result.page(params[:page]).order(params[:sort] ? params[:sort] + " desc" : "spree_suggestions.id desc")
         else
 
           #Orignal Query : @collection = Suggestion.where("LOWER(spree_suggestions.name) #{LIKE} LOWER(:search)",
