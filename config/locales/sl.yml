@@ -1,0 +1,13 @@
+---
+sl:
+  spree:
+    auto_suggest:
+      total: "Skupaj:"
+      listing_suggestions: Seznam iskanj
+      id: ID
+      keywords: Ključne besede
+      count: št. iskanj
+      items_found: št. izdelkov
+      data: Podatki
+      created_at: Ustvarjeno
+      updated_at: Nazadnje uporabljeno
