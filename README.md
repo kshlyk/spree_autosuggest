@@ -47,10 +47,12 @@ Starting point:
 * Ensure specs pass by running `bundle exec rspec spec`
 * Submit your pull request
 
-Copyright (c) 2013 Aleksey Demidov, released under the [New BSD License][3]
+Copyright (c) 2013 [Aleksey Demidov][6] and [contributors][7], released under the [New BSD License][3]
 
 [1]: http://www.fsf.org/licensing/essays/free-sw.html
 [2]: https://github.com/futhr/spree_autosuggest/issues
 [3]: https://github.com/futhr/spree_autosuggest/blob/2-0-stable/LICENSE.md
 [4]: http://www.localeapp.com/projects/4933
 [5]: https://github.com/thoughtbot/guides
+[6]: https://github.com/ademidov
+[7]: https://github.com/futhr/spree_autosuggest/contributors
