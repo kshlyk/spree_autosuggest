@@ -20,7 +20,6 @@ require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 
 require 'rspec/rails'
 require 'capybara/rspec'
-require 'capybara/webkit'
 require 'shoulda-matchers'
 require 'i18n-spec'
 require 'ffaker'
@@ -66,6 +65,4 @@ RSpec.configure do |config|
   Capybara.add_selector(:row) do
     xpath { |num| ".//tbody/tr[#{num}]" }
   end
-
-  Capybara.javascript_driver = :webkit
 end
