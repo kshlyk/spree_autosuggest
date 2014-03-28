@@ -51,5 +51,7 @@ class @Autosuggest
 
   extension_methods: ->
     _renderItem: (ul, item) ->
-        item.label = item.label.replace(new RegExp("(" + $.ui.autocomplete.escapeRegex(@term) + ")", "gi"), "<strong>$1</strong>")
-        $("<li></li>").data("item.autocomplete", item).append("<a>" + item.label + "</a>").appendTo ul
+        if item.url is ""
+          item.url = '/search?utf8=✓&keywords='+item.keywords
+        item.keywords = item.keywords.replace(new RegExp("(" + $.ui.autocomplete.escapeRegex(@term) + ")", "gi"), "<strong>$1</strong>")
+        $("<li></li>").data("item.autocomplete", item).append("<a href=" + item.url + ">" + item.keywords + "</a>").appendTo ul
