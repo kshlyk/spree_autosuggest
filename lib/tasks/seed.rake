@@ -7,7 +7,7 @@ namespace :spree_autosuggest do
       query.keywords = taxon.name # keep the case of keywords same with current
       query.items_found = searcher.retrieve_products.size
       query.count = Spree::Autosuggest::Config[:min_count] + 1
-      query.data = {url: "/t/#{taxon.permalink}"}.to_s
+      query.data = {url: "/t/#{taxon.permalink}", suggestion_type: 'taxons'}.to_s
       query.save
     end
 
@@ -17,7 +17,8 @@ namespace :spree_autosuggest do
       query.keywords = product.name # keep the case of keywords same with current
       query.items_found = 1
       query.count = Spree::Autosuggest::Config[:min_count] + 1
-      query.data = {url: "/products/#{product.permalink}"}.to_s
+      query.data = {url: "/products/#{product.permalink}", suggestion_type: 'products'}.to_s
+      query.product_id = product.id
       query.save
     end
 
