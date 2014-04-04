@@ -1,0 +1,13 @@
+nl:
+  spree:
+    auto_suggest:
+      total: "Totaal:"
+      listing_suggestions: Suggesties
+      id: ID
+      keywords: Keywords
+      count: Count
+      items_found: Items Found
+      data: Data
+      created_at: Created at
+      updated_at: Updated at
+
