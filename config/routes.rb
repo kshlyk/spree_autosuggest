@@ -1,4 +1,4 @@
-Spree::Core::Engine.routes.append do
+Spree::Core::Engine.routes.draw do
   get 'suggestions', to: 'suggestions#index'
   namespace :admin do
   	resources :suggestions
