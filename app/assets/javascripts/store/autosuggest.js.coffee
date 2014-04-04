@@ -16,17 +16,13 @@ class @Autosuggest
       source: (request, response) =>
         @finder(request, response)
       select: (event, ui) =>
-        location.href = ui.item.url
+        if ui.item.store_url is ''
+          location.href = ui.item.url
+        else
+          location.href = ui.item.store_url + ui.item.url
+      focus: (event, ui) =>
+        ui.item.value = ui.item.product_name
       )
-
-  # TODO: rewrite
-  fire_keybinds: (event) ->
-    if event.keyCode == $.ui.keyCode.RIGHT
-      elem = $(@search_field.data("autocomplete").menu.active).find("a")
-      if elem.length > 0
-        elem.trigger("click")
-      else
-        $("li.ui-menu-item:first a").trigger("mouseenter").trigger("click")
 
   finder: (request, response) ->
     term = request.term.toLowerCase()
@@ -54,4 +50,25 @@ class @Autosuggest
         if item.url is ""
           item.url = '/search?utf8=✓&keywords='+item.keywords
         item.keywords = item.keywords.replace(new RegExp("(" + $.ui.autocomplete.escapeRegex(@term) + ")", "gi"), "<strong>$1</strong>")
-        $("<li></li>").data("item.autocomplete", item).append("<a href=" + item.url + ">" + item.keywords + "</a>").appendTo ul
+
+        if item.suggestion_type is "hidden_tags"
+          keywords = item.product_name
+          css_class = 'suggested'
+        else
+          keywords = item.keywords
+          css_class = ''
+
+        if item.image_url is ''
+          thumbnail = ''
+        else
+          thumbnail = "<div class='store-image " + item.store_name + "'><img src='" + item.image_url + "'></div>"
+
+        if item.store_identifier is ''
+          store_identifier = ''
+        else
+          store_identifier = "<span class='store'>" + item.store_identifier + "</span>"
+
+        if item.store_url is ''
+          $("<li class='autosuggest'></li>").addClass(item.store_name).addClass(css_class).data("item.autocomplete", item).append("<a href=" + item.url + ">" + thumbnail + "<span class='title " + item.store_name + "'>" + keywords + "</h5>" + "<span class='price'>" + item.price + "</span>" + store_identifier + "</a>").appendTo ul
+        else
+          $("<li class='autosuggest'></li>").addClass(item.store_name).addClass(css_class).data("item.autocomplete", item).append("<a href=" + item.store_url + item.url + ">" + thumbnail + "<span class='title " + item.store_name + "'>" + keywords + "</h5>" + "<span class='price'>" + item.price + "</span>" + store_identifier + "</a>").appendTo ul
