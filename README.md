@@ -1,16 +1,12 @@
 # Spree Autosuggest
 
-[![Build Status](https://secure.travis-ci.org/futhr/spree_autosuggest.png?branch=2-0-stable)](http://travis-ci.org/futhr/spree_autosuggest)
-[![Dependency Status](https://gemnasium.com/futhr/spree_autosuggest.png)](https://gemnasium.com/futhr/spree_autosuggest)
-[![Coverage Status](https://coveralls.io/repos/futhr/spree_autosuggest/badge.png?branch=2-0-stable)](https://coveralls.io/r/futhr/spree_autosuggest)
-
-This extension adds suggestions for product search.
+This extension adds suggestions for product search. It's been forked and modified to fit specific needs, like sending more info through json and changing the html.
 
 ## Installation
 
 Add to your app `Gemfile`:
 ```ruby
-gem 'spree_autosuggest', github: 'futhr/spree_autosuggest', branch: '2-0-stable'
+gem 'spree_autosuggest', github: 'cgservices/spree_autosuggest', branch: '2-0-stable'
 ```
 
 Run
