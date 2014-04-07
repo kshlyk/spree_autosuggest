@@ -9,6 +9,7 @@ module Spree
         suggestions = Spree::Config[:searcher_class].new(keywords: params['term']).retrieve_products
         suggestions = Spree::Product.search(name_cont: params['term']).result(distinct: true) if suggestions.blank?
         suggestions.collect!{|p|
+          image = p.andand.images.andand.first || p.andand.variants.andand.collect(&:images).flatten.first
           {
             keywords: p.name,
             url: p.permalink.present ? p.permalink : "",
@@ -18,7 +19,7 @@ module Spree
             product_id: p.id,
             product_name: p.name,
             suggestion_type: 'products',
-            image_url: product.images.first.mini_url,
+            image_url: image.present? ? image.mini_url : '',
             price: p.master.price
           }
         }
@@ -27,6 +28,7 @@ module Spree
                       joins('LEFT JOIN spree_products ON (spree_products.id = spree_suggestions.product_id)').
                       joins('LEFT JOIN spree_variants ON (spree_variants.product_id = spree_products.id AND spree_variants.is_master = 1)')
         suggestions.collect!{|s|
+          image = s.product.andand.images.andand.first || s.product.andand.variants.andand.collect(&:images).flatten.first
           {
             keywords: s.keywords,
             url: s.data.present? && eval(s.data).has_key?(:url) ? eval(s.data)[:url] : '',
@@ -36,7 +38,7 @@ module Spree
             product_id: s.product_id,
             product_name: s.andand.product.present? ? s.product.name : s.keywords,
             suggestion_type: s.data.present? && eval(s.data).has_key?(:suggestion_type) ? eval(s.data)[:suggestion_type] : '',
-            image_url: s.andand.product.andand.images.present? ? s.product.images.first.mini_url : '',
+            image_url: image.present? ? image.mini_url : '',
             price: s.andand.product.andand.master.present? ? s.product.master.price : ''
           }
         }
