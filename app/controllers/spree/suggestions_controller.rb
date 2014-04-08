@@ -39,7 +39,7 @@ module Spree
             product_name: s.andand.product.present? ? s.product.name : s.keywords,
             suggestion_type: s.data.present? && eval(s.data).has_key?(:suggestion_type) ? eval(s.data)[:suggestion_type] : '',
             image_url: image.present? ? image.mini_url : '',
-            price: s.andand.product.andand.master.present? ? s.product.master.price : ''
+            price: s.andand.product.andand.master.present? ? Spree::Money.new(s.product.master.price, { :currency => s.product.master.currency}).to_s : ''
           }
         }
       end
