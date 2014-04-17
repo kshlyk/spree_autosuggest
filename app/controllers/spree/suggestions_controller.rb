@@ -13,9 +13,9 @@ module Spree
           {
             keywords: p.name,
             url: p.permalink.present ? p.permalink : "",
-            store_url: defined?(MultiDomainExtension) && current_store != p.andand.stores.andand.first ? "http://#{p.andand.stores.andand.first.andand.domains.split(",").first}#{port}" : '',
-            store_name: defined?(MultiDomainExtension) ? p.stores.first.code : '',
-            store_identifier: defined?(MultiDomainExtension) ? p.stores.first.code : '',
+            store_url: defined?(current_store) && current_store != p.andand.stores.andand.first ? "http://#{p.andand.stores.andand.first.andand.domains.split(",").first}#{port}" : '',
+            store_name: p.respond_to?(:stores) ? p.stores.first.code : '',
+            store_identifier: p.respond_to?(:stores) ? p.stores.first.code : '',
             product_id: p.id,
             product_name: p.name,
             suggestion_type: 'products',
@@ -24,7 +24,8 @@ module Spree
           }
         }
       else
-        suggestions = Spree::Suggestion.relevant(params['term']).
+        group = defined?(current_store) && current_store.respond_to?(:group) ? current_store.group : nil
+        suggestions = Spree::Suggestion.relevant(params['term'], group).
                       joins('LEFT JOIN spree_products ON (spree_products.id = spree_suggestions.product_id)').
                       joins('LEFT JOIN spree_variants ON (spree_variants.product_id = spree_products.id AND spree_variants.is_master = 1)')
         suggestions.collect!{|s|
