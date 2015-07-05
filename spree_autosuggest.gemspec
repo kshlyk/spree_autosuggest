@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.version      = SpreeAutosuggest::VERSION
   s.summary      = 'Search suggestions for Spree Commerce'
   s.description  = s.summary
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.2.0'
 
   s.author       = 'Aleksey Demidov'
   s.email        = 'aleksey.dem@gmail.com'
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_runtime_dependency 'spree', '~> 2.3.0'
+  s.add_runtime_dependency 'spree', '~> 3.0.0'
 
   s.add_development_dependency 'capybara', '~> 2.1.0'
   s.add_development_dependency 'selenium-webdriver'
