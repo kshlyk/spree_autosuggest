@@ -1,7 +1,5 @@
 module Spree
   class SuggestionsController < Spree::StoreController
-    caches_action :index, cache_path: Proc.new {|c| c.request.url }
-
     def index
       params['term'] ||= ' '
       port = Rails.env == 'development' ? ':3000' : ''
